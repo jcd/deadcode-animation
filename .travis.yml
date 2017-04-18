@@ -1,7 +1,8 @@
 language: d
 d:
- - dmd-2.074.0
-
+ - dmd
+ - ldc
+ - gdc
 script:
  - dub test -b unittest-cov --compiler=${DC}
 after_success:
