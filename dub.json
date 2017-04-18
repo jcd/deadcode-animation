@@ -1,0 +1,24 @@
+{
+	"name": "deadcode-animation",
+	"description": "Animation library of deadcode editor",
+	"authors": ["Jonas Drewsen"],
+	"homepage": "http://deadcode.steamwinter.com",
+	"license": "Boost v1",
+    "targetType": "library",
+    "sourcePaths": [ "." ],
+    "importPaths": [ "." ],
+	"dependencies": {	
+	},
+	"configurations" : [
+		{
+			"name" : "library"
+		},
+		{
+			"name" : "unittest",
+			"versions" : [ "TestingByTool" ],
+			"dependencies" : {
+				"deadcode-core" : ">=0.0.0"
+			}
+		}
+	]
+}
