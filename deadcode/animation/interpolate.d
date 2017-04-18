@@ -20,6 +20,7 @@ unittest
 
 auto interpolate(T : int)(T beginValue, T endValue, float delta)
 {
+    import std.math;
 	return cast(int) round((endValue - beginValue) * delta + beginValue);
 }
 
@@ -33,6 +34,7 @@ unittest
 
 auto interpolate(T : uint)(T beginValue, T endValue, float delta)
 {
+    import std.math;
 	return cast(uint) round((endValue - beginValue) * delta + beginValue);
 }
 

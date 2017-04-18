@@ -6,6 +6,8 @@ import std.math;
 import deadcode.animation.mutator;
 import deadcode.animation.curve;
 
+version (unittest) import deadcode.test;
+
 interface Timer
 {
 	void reset();
@@ -156,8 +158,8 @@ unittest
     auto mt = new MockTimer();
     t = new InterpolateTimer(20.0, 1010.0, mt);
     Assert(1010.0, t.start, "InterpolateTimer timer has correct start");
-    t.now; 
-    t.now;
+    t.currTime; 
+    t.currTime;
     Assert(1012.0, t.currTime, "InterpolateTimer timer is forwarded to prepare for reset");
     t.reset();
     Assert(1035.0, t.start, "InterpolateTimer timer has correct reset start");
