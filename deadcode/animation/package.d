@@ -9,7 +9,7 @@
     that type using the timeline.
 
 	---
-    import animation;
+    import deadcode.animation;
     
     class Foo 
     {

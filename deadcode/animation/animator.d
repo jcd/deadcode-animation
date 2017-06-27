@@ -5,6 +5,7 @@
 module deadcode.animation.animator;
 
 import deadcode.animation.interpolate;
+version (unittest) import deadcode.test;
 
 /** A Animator is a base class for classes that can do animation
 
@@ -15,7 +16,7 @@ import deadcode.animation.interpolate;
 
     See_Also: Timeline
 */
-class Animator
+abstract class Animator
 {
 	/// True when this animator is done animating
     @property bool done()
@@ -93,6 +94,38 @@ class DiscreteAnimator(T) : Animator
 	}
 }
 
+unittest
+{
+	double offs = 0;
+	int cnt = 0;
+	auto dlg = (double a, int b) { offs = a; cnt = b; };
+	auto a = new DiscreteAnimator!(typeof(dlg))(dlg, 1.0);
+	a.update(0.5);
+	Assert(0.5, offs);
+	a.update(1.0);
+	Assert(1.0, offs);
+}
+
+unittest
+{
+	double offs = 0;
+	int cnt = 0;
+	class Mock 
+	{
+		public void update(double offset, int count)
+		{
+			offs = offset;
+			cnt = count;
+		}
+	}
+	auto m = new Mock();
+	auto a = new DiscreteAnimator!Mock(m, 1.0);
+	a.update(0.5);
+	Assert(0.5, offs);
+	a.update(1.0);
+	Assert(1.0, offs);
+}
+
 /** An Animator that will apply a Clip on a target object
 
     This Animator uses a target type specific Clip and applies it to an instance
@@ -141,3 +174,23 @@ class AnimatedObject(T) : Animator
 	}
 }
 
+version (none):
+unittest
+{
+	double offs = 0;
+	int cnt = 0;
+	class Mock 
+	{
+		public void update(double offset, int count)
+		{
+			offs = offset;
+			cnt = count;
+		}
+	}
+	auto m = new Mock();
+	auto a = new AnimatedObject!Mock(m);
+	a.update(0.5);
+	Assert(0.5, offs);
+	a.update(1.0);
+	Assert(1.0, offs);
+}
