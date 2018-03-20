@@ -32,6 +32,11 @@ unittest
     Assert(5, interpolate(0, 11, 0.49f), "Can interpolate int using generic interpolation and round down");
 }
 
+auto interpolate(T : bool)(T beginValue, T endValue, float delta)
+{
+	return delta == 1.0;
+}
+
 auto interpolate(T : uint)(T beginValue, T endValue, float delta)
 {
     import std.math;
